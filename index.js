@@ -1,25 +1,31 @@
 const fillArray = () => {
-  const rows = parseInt(prompt("Enter the number of rows: "));
-  const cols = parseInt(prompt("Enter the number of columns: "));
+  const rows = +prompt("Enter the number of rows: ");
+  const cols = +prompt("Enter the number of columns: ");
 
-  if (!rows || !cols || rows <= 0 || cols <= 0) {
-    return alert("The number of rows and columns must be positive integers!");
+  if (Number.isNaN(rows) || !Number.isInteger(rows) || rows <= 0 || Number.isNaN(cols) || !Number.isInteger(cols) || cols <= 0)  {
+    alert("The number of rows and columns must be positive integers!");
+    return;
   }
 
   const arr = [];
-
+  
   for (let i = 0; i < rows; i++) {
-    const rowArray = Array.from({ length: cols }, (_, j) => {
+    const rowArray = [];
+    
+    for (let j = 0; j < cols; j++) {
       const value = prompt(`Enter a value for the cell [${i}][${j}]: `);
-      if (value === null) {
-        return alert("Input cancelled by the user!");
-      }
-      return value;
-    });
 
+      if (value === null) {
+        alert ("Input cancelled by the user!");
+        return;
+      }
+
+      rowArray.push(value);
+    }
+    
     arr.push(rowArray);
   }
-
+  
   return arr;
 };
 
